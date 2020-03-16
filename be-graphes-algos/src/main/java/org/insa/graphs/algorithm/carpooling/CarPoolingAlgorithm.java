@@ -20,5 +20,8 @@ public abstract class CarPoolingAlgorithm extends AbstractAlgorithm<CarPoolingOb
     public CarPoolingData getInputData() {
         return (CarPoolingData) super.getInputData();
     }
+    
+    /* il est le commentaire */
+    
 
 }
