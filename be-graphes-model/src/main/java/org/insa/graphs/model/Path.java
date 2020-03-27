@@ -56,6 +56,7 @@ public class Path {
     public static Path createShortestPathFromNodes(Graph graph, List<Node> nodes)
             throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
+        
         // TODO:
         return new Path(graph, arcs);
     }
@@ -214,7 +215,11 @@ public class Path {
      */
     public float getLength() {
         // TODO:
-        return 0;
+    	float totalLength = 0.0f;
+    	for (Arc myArc : this.arcs) {
+    		totalLength += myArc.getLength();
+    	}
+        return totalLength;
     }
 
     /**
