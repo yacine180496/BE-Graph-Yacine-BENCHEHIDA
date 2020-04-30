@@ -1,12 +1,14 @@
 package org.insa.graphs.algorithm.shortestpath;
 
 import org.insa.graphs.model.Node;
+import org.insa.graphs.model.Graph;
+import java.util.*;
 
 public class Label implements Comparable<Label>{
 	
-/*----------------------Attributs--------------------------------------------------------*/
+/*--------------------------Attributs------------------------------------------------------*/
 	
-	private Node current_Node ; 
+	private int current_NodeId ; 
 	
 	private boolean mark ; // le marquage 
 	
@@ -14,33 +16,60 @@ public class Label implements Comparable<Label>{
 	
 	private int father; // le prédécent 
 	
-/*---------------------Constructeur-------------------------------------------------------*/
+	private boolean aux ; 
 	
+	
+/*-------------------------Constructeur---------------------------------------------------*/
+	
+	
+
+
 	public Label(Node node) {
-		this.current_Node = node ; 
+		this.current_NodeId = node.getId() ;  
 		this.mark = false ; 
 		this.cost = Double.POSITIVE_INFINITY; 
 		this.father = 0; 
 	}
-
+	
+	
 /*--------------------les--Getteur---&---les---Setteur-------------------------------------*/
-
-	public Node getCurrent_Node() {
-		return current_Node;
+	
+	
+	public static ArrayList<Label> createAllLabelFromGraph(Graph graph) {
+		ArrayList<Label> labels = new ArrayList<Label>();
+		for(Node node: graph.getNodes()) {
+			labels.add(new Label(node));
+		}
+		return labels;
 	}
 
-	public void setCurrent_Node(Node current_Node) {
-		this.current_Node = current_Node;
+
+	public boolean isAux() {
+		return aux;
 	}
 
-	public boolean isMark() {
+	public void setAux() {
+		this.aux = true;
+	}
+	
+	public boolean getMark() {
 		return mark;
 	}
-
-	public void setMark(boolean mark) {
-		this.mark = mark;
+	
+	public void setMark() {
+		this.mark = true;
 	}
 
+	public int getCurrent_NodeId() {
+		return current_NodeId;
+	}
+
+
+	public void setCurrent_NodeId(int current_Node) {
+		this.current_NodeId = current_Node;
+	}
+
+	
 	public double getCost() {
 		return cost;
 	}
