@@ -2,21 +2,24 @@ package org.insa.graphs.algorithm.shortestpath;
 
 import org.insa.graphs.algorithm.utils.*;
 
+
 import org.insa.graphs.algorithm.AbstractSolution.Status;
 
 import org.insa.graphs.model.Node;
 import org.insa.graphs.model.Arc;
 import org.insa.graphs.model.Graph;
-import org.insa.graphs.model.Path ; 
-
+import org.insa.graphs.model.Path ;
+import org.insa.graphs.model.Point;
 
 import java.util.*;
 
 
 public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 	
+	private int nombreSucceurTeste;
     public DijkstraAlgorithm(ShortestPathData data) {
         super(data);
+        this.nombreSucceurTeste = 0;
     }
     
     @Override
@@ -49,19 +52,25 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
      // Notify observers about the first event (origin processed).
         notifyOriginProcessed(data.getOrigin());
         
-      
+        boolean coutCroissant = true;
+        
         
 /*-----Corps-du-programme-------------------------------------------------------------*/
       
         Label auxNode ;
         boolean found = false ;
-        
+        double previouscost = 0.0 ;
         while(!labelHeap.isEmpty()&&!found) {
         	auxNode = labelHeap.deleteMin() ; 
         	auxNode.setMark(); 
-        	
+        	if(coutCroissant && previouscost <= auxNode.getCost()) {
+        		previouscost = auxNode.getCost();
+        	}else {
+        		coutCroissant = false;
+        	}
         	if(auxNode.getCurrent_NodeId()==data.getDestination().getId()) {
         		found = true ; 
+        		break;
         	}
         	
         	for(Arc a : nodes.get(auxNode.getCurrent_NodeId()).getSuccessors()) {
@@ -69,7 +78,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         		if(!data.isAllowed(a)) {
         			continue;
         		}
-        		
+        		this.nombreSucceurTeste++;
         		int nodeId = a.getDestination().getId(); 
         		
         		if(tabLabel[nodeId]==null) {
@@ -91,12 +100,10 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             			}else {
             				labelHeap.remove(tabLabel[nodeId]);
             			}
-                    	tabLabel[nodeId].setCost(tabLabel[nodeId].getCost()+w); 
+                    	tabLabel[nodeId].setCost(tabLabel[auxNode.getCurrent_NodeId()].getCost()+w); 
                     	tabLabel[nodeId].setFather(auxNode.getCurrent_NodeId());
                         labelHeap.insert(tabLabel[nodeId]);
                         predecessorArcs[a.getDestination().getId()] = a;
-                    }else if(newDistance==oldDistance) {
-                    	
                     }
         		}
         	}
@@ -126,8 +133,12 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             // Create the final solution.
             
             solution = new ShortestPathSolution(data, Status.OPTIMAL, new Path(graph, arcs));
+            System.out.println("Longeur du chemin (théorique) =>"+solution.getPath().getLength());
+            System.out.println("nombre de successeur testee :"+ this.nombreSucceurTeste);
+            System.out.println("Cout croissant? "+coutCroissant);
+            
         }
-  
+        
         
         return solution ;
    
