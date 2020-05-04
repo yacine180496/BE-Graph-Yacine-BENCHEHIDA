@@ -9,7 +9,7 @@ import org.insa.graphs.model.Node;
 import org.insa.graphs.model.Arc;
 import org.insa.graphs.model.Graph;
 import org.insa.graphs.model.Path ;
-import org.insa.graphs.model.Point;
+
 
 import java.util.*;
 
@@ -60,6 +60,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         Label auxNode ;
         boolean found = false ;
         double previouscost = 0.0 ;
+        boolean tasValid = true;
         while(!labelHeap.isEmpty()&&!found) {
         	auxNode = labelHeap.deleteMin() ; 
         	auxNode.setMark(); 
@@ -107,8 +108,13 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
                     }
         		}
         	}
-        	
+        	if(tasValid) {
+        		tasValid = labelHeap.isValid(0);
+        	}
         }
+        System.out.println("le tas reste valide à chaque itération ? " + labelHeap.isValid(0));
+        
+        
         
      // Destination has no predecessor, the solution is infeasible...
         if (predecessorArcs[data.getDestination().getId()] == null) {
