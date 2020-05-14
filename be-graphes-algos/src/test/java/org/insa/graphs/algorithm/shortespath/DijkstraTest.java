@@ -34,7 +34,6 @@ public class DijkstraTest {
   // List of nodes
   private static Node[] nodes;
 
-  //private String mapsLocation = "/home/louis/Documents/INSA/map-BE_Graphes";
   private String mapsLocation = "D:/BE-Graph/BE-Graph-Yacine-BENCHEHIDA/Maps";
   
   @BeforeClass
