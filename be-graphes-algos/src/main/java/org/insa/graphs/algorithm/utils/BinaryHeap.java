@@ -247,7 +247,7 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
     	}else {
     		return true;
     	}
-    	
     }
+    
 
 }

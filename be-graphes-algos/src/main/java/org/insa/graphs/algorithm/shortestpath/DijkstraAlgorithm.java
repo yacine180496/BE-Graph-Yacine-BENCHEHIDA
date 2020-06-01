@@ -139,8 +139,8 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             // Create the final solution.
             
             solution = new ShortestPathSolution(data, Status.OPTIMAL, new Path(graph, arcs));
-            System.out.println("Longeur du chemin (théorique) =>"+solution.getPath().getLength());
-            System.out.println("nombre de successeur testee :"+ this.nombreSucceurTeste);
+            System.out.println("Longueur du chemin (théorique) =>"+solution.getPath().getLength());
+            System.out.println("nombre de successeurs testés :"+ this.nombreSucceurTeste);
             System.out.println("Cout croissant? "+coutCroissant);
             
         }

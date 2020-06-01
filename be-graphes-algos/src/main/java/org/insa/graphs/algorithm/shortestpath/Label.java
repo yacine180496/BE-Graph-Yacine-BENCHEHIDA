@@ -16,7 +16,7 @@ public class Label implements Comparable<Label>{
 	
 	private int father; // le prédécent 
 	
-	private boolean aux ; 
+	private boolean aux ; // pour savoir s'il est dans le tas
 	
 	
 /*-------------------------Constructeur---------------------------------------------------*/
