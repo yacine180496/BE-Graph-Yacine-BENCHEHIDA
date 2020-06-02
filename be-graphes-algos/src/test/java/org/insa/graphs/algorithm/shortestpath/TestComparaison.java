@@ -30,7 +30,7 @@ public class TestComparaison {
 	// On va se servir de l'algorithme de BellmanFord car il était initialement codé 
 
 		// Some paths...
-		private static Path a, b, c, d, e, f;
+		private static Path a, b, c, d, e, f ;
 		private static AbstractSolution.Status emptyPathD, emptyPathA;
 		private static AbstractSolution.Status nonexistentPathD, nonexistentPathA;
 
@@ -97,13 +97,11 @@ public class TestComparaison {
 
 		} 
 
-		// Chemin court existant -> vérification de la longueure avec Bellman ford en référence
+		// Chemin court existant -> vérification de la longueur avec Bellman ford en référence
 		// référence, test sur les deux cartes
 		@Test
 		public void Test1() {
-			/*assertEquals((long) (shortPathA.getLength()), (long) (shortPathB.getLength()));*/
 			assertEquals((long) (b.getLength()), (long) (a.getLength()));
-			/*assertEquals((long) (shortPathA4.getLength()), (long) (shortPathB4.getLength()));*/
 			assertEquals((long) (e.getLength()), (long) (d.getLength()));
 
 		}
